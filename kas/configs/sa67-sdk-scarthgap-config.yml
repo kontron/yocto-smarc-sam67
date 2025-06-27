@@ -1,0 +1,92 @@
+header:
+  version: 17
+  includes:
+  - ./templates/bblayers.conf.yml
+  - ./templates/local-arago64-v2.conf.yml
+
+build_system: oe
+
+machine: sa67-mainline
+distro: arago
+
+target: tisdk-tiny-image
+
+_source_dir: ./
+
+repos:
+  meta-kontron-sa67:
+    url: "https://gitlab.kontron.com/smarc/meta-kontron-sa67.git"
+    branch: "main"
+
+  meta-tisdk:
+    url: "https://github.com/TexasInstruments/meta-tisdk.git"
+    branch: "scarthgap"
+    commit: "73aae47bf953dd4cf06e448367135b1cac0869a1"
+    layers:
+      meta-ti-foundational:
+
+  meta-arago:
+    url: "https://git.yoctoproject.org/meta-arago"
+    branch: "scarthgap"
+    commit: "c04e85dd207dd24387edac10526b9ec971df9496"
+    layers:
+      meta-arago-distro:
+      meta-arago-extras:
+      meta-arago-test:
+
+  meta-qt6:
+    url: "https://code.qt.io/yocto/meta-qt6.git"
+    branch: "6.9"
+    commit: "338aefa1572bb49e236fc0e2c5a565ffbf6b309f"
+
+  meta-virtualization:
+    url: "https://git.yoctoproject.org/meta-virtualization"
+    branch: "scarthgap"
+    commit: "9287a355b338361e42027ce371444111a791d64f"
+
+  meta-openembedded:
+    url: "https://git.openembedded.org/meta-openembedded"
+    branch: "scarthgap"
+    commit: "67ad83dd7c2485dae0c90eac345007af6195b84d"
+    layers:
+      meta-networking:
+      meta-python:
+      meta-oe:
+      meta-gnome:
+      meta-filesystems:
+      meta-multimedia:
+
+  meta-ti:
+    url: "https://git.yoctoproject.org/meta-ti"
+    branch: "scarthgap"
+    commit: "a98a2e1029870b25e117d4c9410e75bfd955f35a"
+    layers:
+      meta-ti-extras:
+      meta-beagle:
+      meta-ti-bsp:
+
+  meta-arm:
+    url: "https://git.yoctoproject.org/meta-arm"
+    branch: "scarthgap"
+    commit: "f3640941c600d03ea53ce5b9254f0fead18f8bc0"
+    layers:
+      meta-arm:
+      meta-arm-toolchain:
+
+  meta-clang:
+    url: "https://github.com/kraj/meta-clang"
+    branch: "scarthgap"
+    commit: "b9ef02282197380ef05edbd0eb852e1934ceb59b"
+
+  oe-core:
+    url: "https://git.openembedded.org/openembedded-core"
+    branch: "scarthgap"
+    commit: "4003b5faa1e5acfa025e1d0df4e021e06cf8724c"
+    layers:
+      meta:
+
+local_conf_header:
+  oe-layersetup-local-conf-config-specific: |
+    DISTRO_FEATURES:append = " virtualization"
+    DISTROOVERRIDES:append = ":foundational"
+

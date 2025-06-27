@@ -39,6 +39,43 @@ E.g. to build the tisdk-tiny-image for the sa67-mainline machine, use the follow
 MACHINE=sa67-mainline bitbake -k tisdk-tiny-image
 ```
 
+## Building using Siemens KAS
+
+In the kas folder, configuration files have been added to use Siemens KAS for building the Yocto BSP. It is assumed that kas version 4.6 or later has been installed on the build machine. See the KAS user guide at https://kas.readthedocs.io/en/latest/userguide.html for more detail.
+
+Before building the SMARC sAM67 Yocto BSP with kas, bitbake must be installed in the kas working directory first. It is not possible to configure the bitbake repo url in the sa67-sdk-scarthgap-config.yml config file along with the yocto layer repos. Thus the build steps using kas would be as follows.
+
+```
+cd kontron-sa67-yocto
+cd kas
+git clone https://git.openembedded.org/bitbake --branch "2.8"
+kas build --target tisdk-tiny-image configs/sa67-sdk-scarthgap-config.yml
+```
+
+In case that a different build directory is desired to separate the build folder from the kas working directory containing the source repos, the KAS_BUILD_DIR which is the same as the KAS_WORK_DIR by default can be changed. It is also possible to override the sa67-mainline machine from the .yml file by setting the KAS_MACHINE environment var.
+
+```
+KAS_MACHINE=sa67 KAS_BUILD_DIR=../kas_build kas build --target tisdk-tiny-image configs/sa67-sdk-scarthgap-config.yml
+```
+
+### Handling Credentials with KAS
+
+KAS supports credential handling in case that this is required when reading the different layer repositories. Among others, the .netrc file which is normally located in the users home directory.
+
+Example .netrc file:
+
+```
+machine gitlab.kontron.com
+login <username>
+password <password>
+```
+
+To use kas with the netrc user credentials, the netrc file is passed with the NETRC_FILE environment variable.
+
+```
+NETRC_FILE=/path/to/.netrc KAS_BUILD_DIR=../kas_build kas checkout configs/sa67-sdk-scarthgap-config.yml
+```
+
 ## Installation
 
 When build has been finished, the build artefacts can be found in the deploy_ti/images/<machine>/ folder. Among the artefacts are bootfiles (u-boot, tiboot3, bl31), linux kernel image and a (packed) rootfs wic image that can be installed directly either on SD card or on onboard emmc. E.g. to install the tisdk-tiny-image wic image on SD card for booting, attach the SD card to your host machine and use the following command.
