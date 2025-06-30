@@ -13,7 +13,7 @@ Building this Yocto BSP has been tested on Ubuntu 20.04.6 LTS build host. It sho
 To prepare the SA67 Yocto BSP for building, follow the steps below.
 
 ```
-cd kontron-sa67-yocto
+cd yocto-smarc-sam67
 ./oe-layertool-setup.sh -f configs/sdk-linux-sa67.txt
 cd build
 . conf/setenv
@@ -46,7 +46,7 @@ In the kas folder, configuration files have been added to use Siemens KAS for bu
 Before building the SMARC sAM67 Yocto BSP with kas, bitbake must be installed in the kas working directory first. It is not possible to configure the bitbake repo url in the sa67-sdk-scarthgap-config.yml config file along with the yocto layer repos. Thus the build steps using kas would be as follows.
 
 ```
-cd kontron-sa67-yocto
+cd yocto-smarc-sam67
 cd kas
 git clone https://git.openembedded.org/bitbake --branch "2.8"
 kas build --target tisdk-tiny-image configs/sa67-sdk-scarthgap-config.yml
