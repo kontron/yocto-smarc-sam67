@@ -18,7 +18,7 @@ OECORELOCALCONF=./sample-files/local-arago64-v2.conf.sample
 BITBAKE_INCLUSIVE_VARS=yes
 
 meta-tisdk,https://git.ti.com/git/ti-sdk-linux/meta-tisdk.git,scarthgap,73aae47bf953dd4cf06e448367135b1cac0869a1,layers=meta-ti-foundational
-meta-kontron-sa67,ssh://git@gitlab.kontron.com:22204/smarc/meta-kontron-sa67.git,main,HEAD,layers=
+meta-smarc-sa67,https://github.com/kontron/meta-smarc-sam67.git,main,HEAD,layers=
 LOCALCONF:DISTRO_FEATURES:append = " virtualization"
 LOCALCONF:DISTROOVERRIDES:append = ":foundational"
 
