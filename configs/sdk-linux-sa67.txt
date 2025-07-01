@@ -14,7 +14,7 @@ meta-clang,https://github.com/kraj/meta-clang,scarthgap,b9ef02282197380ef05edbd0
 oe-core,https://git.openembedded.org/openembedded-core,scarthgap,4003b5faa1e5acfa025e1d0df4e021e06cf8724c,layers=meta
 
 OECORELAYERCONF=./sample-files/bblayers.conf.sample
-OECORELOCALCONF=./sample-files/local-arago64-v2.conf.sample
+OECORELOCALCONF=./sample-files/local-arago64-sam67.conf.sample
 BITBAKE_INCLUSIVE_VARS=yes
 
 meta-tisdk,https://git.ti.com/git/ti-sdk-linux/meta-tisdk.git,scarthgap,73aae47bf953dd4cf06e448367135b1cac0869a1,layers=meta-ti-foundational
